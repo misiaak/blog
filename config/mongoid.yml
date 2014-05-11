@@ -1,3 +1,10 @@
+production:
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
+      options:
+        skip_version_check: true
+        safe: true
 development:
   # Configure available database sessions. (required)
   sessions:
@@ -51,7 +58,7 @@ development:
 
     # Raise an error when performing a #find and the document is not found.
     # (default: true)
-    raise_not_found_error: false
+    # raise_not_found_error: true
 
     # Raise an error when defining a scope with the same name as an
     # existing method. (default: false)
@@ -78,10 +85,3 @@ test:
         # low amounts for fast failures.
         max_retries: 1
         retry_interval: 0
-production: 
-  sessions: 
-    default: 
-      uri: <%= ENV['MONGOLAB_URI'] %>
-      options:
-        safe: true
-        skip_version_check: true
