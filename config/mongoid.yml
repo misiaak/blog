@@ -1,9 +1,3 @@
-production:
-  sessions:
-    default:
-      uri: <%= ENV['MONGOLAB_URI'] %>
-      
-
 development:
   # Configure available database sessions. (required)
   sessions:
@@ -17,14 +11,14 @@ development:
       hosts:
         - localhost:27017
       options:
-        # Change the default write concern. (default = { w: 1 })
-        # write:
-        # w: 1
+        # Change whether the session persists in safe mode by default.
+        # (default: false)
+        # safe: false
 
-        # Change the default consistency model to primary, secondary.
-        # 'secondary' will send reads to secondaries, 'primary' sends everything
-        # to master. (default: primary)
-        # read: secondary_preferred
+        # Change the default consistency model to :eventual or :strong.
+        # :eventual will send reads to secondaries, :strong sends everything
+        # to master. (default: :eventual)
+        # consistency: :eventual
 
         # How many times Moped should attempt to retry an operation after
         # failure. (default: 30)
@@ -35,6 +29,10 @@ development:
         # retry_interval: 1
   # Configure Mongoid specific options. (optional)
   options:
+    # Configuration for whether or not to allow access to fields that do
+    # not have a field definition on the model. (default: true)
+    # allow_dynamic_fields: true
+
     # Enable the identity map, needed for eager loading. (default: false)
     # identity_map_enabled: false
 
@@ -59,7 +57,11 @@ development:
     # existing method. (default: false)
     # scope_overwrite_exception: false
 
-    # Use Active Support's time zone in conversions. (default: true)
+    # Skip the database version check, used when connecting to a db without
+    # admin access. (default: false)
+    # skip_version_check: false
+
+    # User Active Support's time zone in conversions. (default: true)
     # use_activesupport_time_zone: true
 
     # Ensure all times are UTC in the app side. (default: false)
@@ -71,7 +73,7 @@ test:
       hosts:
         - localhost:27017
       options:
-        read: primary
+        consistency: :strong
         # In the test environment we lower the retries and retry interval to
         # low amounts for fast failures.
         max_retries: 1
