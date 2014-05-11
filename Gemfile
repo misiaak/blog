@@ -14,7 +14,7 @@ gem 'decent_exposure'
 gem 'decent_decoration'
 gem 'flatui-rails', github: 'pkurek/flatui-rails'
 
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'uglifier'
 
