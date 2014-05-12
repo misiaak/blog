@@ -1,5 +1,5 @@
-class PostDecorator < Draper::Decorator
-  decorates :post
+class CommentDecorator < Draper::Decorator
+  decorates :comment
   delegate_all
 
   def friendly_title

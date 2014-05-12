@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
-  expose_decorated(:post, attributes: :post_params)
+  expose_decorated(:posts, attributes: :post_params)
   expose_decorated(:comments) { Comment.get_all(current_user, params[:id]) }
   expose_decorated(:posts) { Post.all }
 
