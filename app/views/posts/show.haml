@@ -10,3 +10,19 @@
   .post__tags-list.tagsinput
     - post.tags_array.each do |tag|
       = content_tag :span, tag, class: 'tag'
+
+%br
+%br
+%h2 comments
+%ol
+  .post__comment= link_to "add comment", new_post_comments_path(post),  class: 'comment__button-add'
+  %br
+  - comments.each do |comment|
+    %li.post--short-size
+      .post__title= comment.body
+      .post__created_at= comment.friendly_date
+      = link_to "vote up", voteup_post_comments_path(post, comment), :method => :post
+      = link_to "vote down", votedown_post_comments_path(post, comment), :method => :post
+      - if comment.abusive
+        %br
+        = link_to "mark_as_not_abusive", mark_as_not_abusive_post_comments_path(post, comment), :method => :post

@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!
-  expose_decorated(:posts) { Post.all }
   expose_decorated(:post, attributes: :post_params)
+  expose_decorated(:comments) { Comment.get_all(current_user, params[:id]) }
+  expose_decorated(:posts) { Post.all }
+
   expose(:tag_cloud) { [] }
 
   def index
@@ -30,12 +32,12 @@ class PostsController < ApplicationController
   end
 
   def mark_archived
-    # post = Post.find params[:id]
     post.archive!
     render action: :index
   end
 
   def create
+    post.user_id = current_user.id
     if post.save
       redirect_to action: :index
     else
