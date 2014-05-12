@@ -1,4 +1,4 @@
- class Post
+class Post
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Taggable
@@ -33,7 +33,8 @@
     end
   end
 
-
-
-
+def self.get_all
+    posts = self.all
+    return posts
+  end
 end

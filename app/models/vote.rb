@@ -2,7 +2,7 @@ class Vote
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Taggable
-
+  after_save :mark_comment_if_is_negative_as_abusive
   belongs_to :user
   belongs_to :comment
 
