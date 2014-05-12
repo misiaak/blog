@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
   def create
     comment = post.comments.build(comment_params)
     comment.user_id = current_user.id
-
     if comment.save
       redirect_to controller:'posts', action: 'index'
     else
@@ -22,15 +21,14 @@ class CommentsController < ApplicationController
 
   def mark_as_not_abusive
     comment.mark_as_not_abusive
-
     redirect_to post
   end
 
   def vote_up
     if self.create_vote(1)
-      flash[:notice] = "Your vote was saved !";
+      flash[:notice] = "Thank you for voting!"
     else
-      flash[:notice] = "Can't vote twice for the same comment!"
+      flash[:notice] = "You already voted for this comment"
     end
 
     redirect_to post
@@ -38,9 +36,9 @@ class CommentsController < ApplicationController
 
   def vote_down
     if self.create_vote(-1)
-      flash[:notice] = "Your vote was saved !";
+      flash[:notice] = "Thank you for voting!";
     else
-      flash[:notice] = "Can't vote twice for the same comment!"
+      flash[:notice] = "You already voted for this comment"
     end
 
     redirect_to post

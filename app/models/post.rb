@@ -33,7 +33,7 @@ class Post
     end
   end
 
-def self.get_all
+  def self.get_all
     posts = self.all
     return posts
   end

@@ -10,7 +10,7 @@ class Comment
   belongs_to  :user
   has_many :votes
 
-def mark_as_not_abusive
+  def mark_as_not_abusive
     update_attribute :abusive, false
   end
 
@@ -21,10 +21,8 @@ def mark_as_not_abusive
   def self.get_all(current_user, post_id)
     post = Post.find(post_id)
     comments = post.comments
-
     if comments.size >= 1
       comments_selected = []
-
       comments.each do |comment|
         if current_user.owner? post
           comments_selected.push(comment)
@@ -34,14 +32,8 @@ def mark_as_not_abusive
           end
         end
       end
-
       return comments_selected
     end
-
     return comments
   end
-  
-
-  
-
 end
